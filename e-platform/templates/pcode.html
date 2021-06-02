@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Dashboard</title>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include 'navbar.html' %}
+<div class="content-wrapper" style="background-color:white !important">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Questions</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="createquiz.php">Home</a></li>
+                    <li class="breadcrumb-item active">Questions</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="content">
+  <div class="row mx-auto">
+    <div class="col-12 mx-auto">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="jumbotron">
+                {% for i in c %}
+                <h4><b>Question:</b><br>{{i.question}}</h4>
+                <pre><h4><b>Code:</b></h4>{{i.code}}</pre>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+</div>
+</div>
+{% include 'includes.html' %}
+</body>
+</html>

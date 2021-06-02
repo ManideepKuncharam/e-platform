@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BVRIT | Python</title>
+  <link rel="shortcut icon" href="{%static 'images/bv.png'%}"/>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" oncopy="return false" oncut="return false" on paste="return false">
+<div class="wrapper">
+
+{% include 'navbar.html' %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Python</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+              <li class="breadcrumb-item active">Python</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">C</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              {% for i in c %}
+                <div class="row mt-4">
+                  <div class="col-sm-12 mx-auto">
+                    <div class="position-relative p-3 bg-dark" style="height: 120px">
+                      <div class="ribbon-wrapper ribbon-lg">
+                        <div class="ribbon bg-danger text-lg">
+                          Solved
+                        </div>
+                      </div>
+                      <h5><b>{{i.title}}</b></h5>
+                      <a href="cquestions/{{i.id}}"><button class="btn btn-success">Solve</button></a>
+                    </div>
+                  </div>
+                </div>
+             {% endfor %}
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+</div>
+{% include 'includes.html' %}
+</body>
+</html>

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BVRIT | Quiz List</title>
+  <link rel="shortcut icon" href="{%static 'images/bv.png'%}"/>
+  <style>
+    #fieldGroupTemplate {
+    display: none;
+    }
+</style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include 'staffnavbar.html' %}
+    <div class="content-wrapper" style="background-color:white">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Questions</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="createquiz.php">Home</a></li>
+                        <li class="breadcrumb-item active">Questions</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Question</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form method='POST' action='/addquestion'>
+                                {% csrf_token %}
+                                <input type='hidden' name='id' value={{ id }}>
+                                <div class="col-md-12  ">
+                                    <div class="form-group">
+                                        <h4>Question</h4>
+                                        {% for i in s %}
+                                        <textarea name="question" class="text">{{i.question}}</textarea>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <h4>Options</h4>
+                                <a href="javascript:void(0)" class="btn btn-success addMore">
+                                    <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add More Options
+                                </a><br><br>
+                                <div class="row fieldGroup">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select class="form-control" name='answer[]' >
+                                                <option value='wrong'>Wrong</option>
+                                                <option value='right'>Right</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  ">
+                                        <div class="form-group">
+                                            <textarea name="option[]" class="text"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><button class='btn btn-primary' name='submit1'>Submit</button>
+                            </form>
+                        </div>
+
+                        <div class="row" id="fieldGroupTemplate">
+                            <div class="col-md-10  ">
+                                <br><div class="form-group floating-label">
+                                        <select class="form-control" name='answer[]' >
+                                            <option value='wrong'>Wrong</option>
+                                            <option value='right'>Right</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2  ">
+                                    <br><a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</a>
+                                </div>
+                                <div class="col-sm-12 ">
+                                    <div class="form-group">
+                                        <textarea name="option[]" class="rich"></textarea>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </section>    
+    </div>
+</div>
+{% include 'includes.html' %}
+</body>
+</html>

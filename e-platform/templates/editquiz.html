@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BVRTI | Edit / Result</title>
+  <link rel="shortcut icon" href="{%static 'images/bv.png'%}"/>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include 'staffnavbar.html' %}
+ <div class="content-wrapper" style="background-color:white;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Quiz</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="createquiz.php">Home</a></li>
+              <li class="breadcrumb-item active">Quiz</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Create Quiz</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" id="quickForm" method='POST' action="/updatequiz">
+                {% csrf_token %}
+                <div class="card-body">
+                <input type="hidden" name="id" value={{id}}>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Quiz Title</label>
+                    <input type="text" name="title" required class="form-control" id="exampleInputEmail1" placeholder="Title" value="{{title}}">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea name="description" class="textarea">{{description}}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Timer</label>
+                    <input type="number" name="timer" required  class="form-control" id="exampleInputEmail1" placeholder="Please Enter time in Minutes" value="{{timer}}">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" name='update'>Update Quiz</button>
+                </div>
+              </form>
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+  <div class="col-md-12">
+            <div class="card-header">
+                <h4>
+                  <i class="fas fa-bullhorn"></i>
+                  <b><u>Questions</u></b>
+                </h4><br>
+                  <a href='/question/{{ id }}'><button class='btn btn-primary'>Add New Question</button></a>
+              </div>
+            <table id="example2" class="table table-bordered table-hover">
+                <tbody>
+                {% for i in q %}
+                <tr>
+                  <td>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <div class="callout callout-info">
+                          <h5><b><u>Question-</u></b></h5>
+                          <h5>{{i.question | striptags}}</h5>
+                          <h5><b><u>Options</u></b></h5>
+                          {% for j,k in o.items %}
+                            {% if j == i.id %}
+                              {% for z in k %}
+                              <h6>{{z.answer | striptags}}</h6>
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}  
+                            <a href="/editquestion/{{i.id}}/{{id}}"><button class='btn btn-primary'>Edit</button></a>
+                            <a href="/deletequestion/{{i.id}}/{{id}}"><button class='btn btn-danger'>DELETE</button></a>
+                        </div>
+                      </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+</section>
+</div>
+{% include 'includes.html' %}
+</body>
+</html>

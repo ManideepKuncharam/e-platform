@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BVRIT | Create Quiz</title>
+  <link rel="shortcut icon" href="{%static 'images/bv.png'%}"/>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed"oncopy="return false" oncut="return false" onpaste="return false">
+<div class="wrapper">
+{% include 'staffnavbar.html' %}
+ <div class="content-wrapper" style="background-color:white;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Quiz</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/logout">Home</a></li>
+              <li class="breadcrumb-item active">Quiz</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Create Quiz</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" id="quickForm" method='POST' action="validquiz">
+              {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Quiz Title</label>
+                    <input type="text" name="title" required class="form-control" id="exampleInputEmail1" placeholder="Title">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea name="description" class="textarea"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Timer</label>
+                    <input type="number" name="timer" required  class="form-control" id="exampleInputEmail1" placeholder="Please Enter time in Minutes">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" name='submit'>Create New Quiz</button>
+                </div>
+              </form>
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+</div>
+{% include 'includes.html' %}
+</body>
+</html>
